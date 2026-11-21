@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>動作訓練 - AI 健身教練</title>
+<meta name="theme-color" content="#0b1220">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <script type="module" crossorigin src="./assets/train-BzCrG1uW.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/sw-register-DEgpXgCw.js">
+  <link rel="modulepreload" crossorigin href="./assets/db-wefy5cVT.js">
+  <link rel="modulepreload" crossorigin href="./assets/catalog-Daa4BwYz.js">
+  <link rel="modulepreload" crossorigin href="./assets/pose-benchmark-CTFJzNfz.js">
+  <link rel="modulepreload" crossorigin href="./assets/storage-syORRQI_.js">
+  <link rel="stylesheet" crossorigin href="./assets/sw-register-Bt4cX4zb.css">
+</head>
+<body class="train-page">
+<main id="train-stage" class="train-stage">
+  <div id="cam-wrap" class="stage-video-wrap">
+    <video id="cam" playsinline muted></video>
+    <canvas id="overlay"></canvas>
+  </div>
+
+  <header id="top-band" class="top-band tone-neutral" aria-live="polite">
+    <div class="top-band-main">
+      <div id="top-exercise-name" class="top-exercise-name">深蹲</div>
+      <div id="top-status-text" class="top-status-text">請先閱讀動作示範</div>
+      <div id="set-progress" class="top-set-progress">尚未開始 · 已完成 0 組</div>
+    </div>
+    <nav class="top-nav" aria-label="頁面導覽">
+      <a class="top-nav-link" href="./index.html">首頁</a>
+      <a class="top-nav-link" href="./review.html">回顧</a>
+    </nav>
+  </header>
+
+  <div class="stage-alerts">
+    <div id="interrupt-banner" class="alert-banner fail hidden" role="alert">
+      <div id="interrupt-msg">已中斷：偵測到頁面切換至背景或相機串流結束，已停止取樣並將進度寫入本地儲存。</div>
+      <div class="alert-actions">
+        <button id="btn-restart" class="btn-secondary" type="button">重新開始</button>
+      </div>
+    </div>
+    <div id="opfs-banner" class="alert-banner warn hidden">
+      無 Pose 證據：此環境不支援或無法寫入 OPFS，本次將僅保存 Session 摘要與計數結果。
+    </div>
+    <div id="status-banner" class="alert-banner hidden"></div>
+  </div>
+
+  <aside class="hud-rep-box" aria-label="完成次數">
+    <div id="rep-complete" class="hud-rep-num">0</div>
+    <div class="hud-rep-sub">待確認 <span id="rep-uncertain">0</span></div>
+  </aside>
+
+  <div id="knee-angle-live" class="hud-knee">膝角 --</div>
+
+  <section id="preview-overlay" class="preview-overlay" aria-label="動作示範預覽">
+    <div class="preview-card">
+      <div id="preview-figure" class="preview-figure" aria-hidden="true"></div>
+      <div class="preview-header">
+        <h1 id="preview-name" class="preview-name">深蹲</h1>
+        <span id="preview-view-tag" class="exercise-view-tag">側面</span>
+      </div>
+      <ol id="preview-steps" class="preview-steps"></ol>
+      <div id="preview-safety" class="preview-safety" role="note"></div>
+      <button id="btn-preview-start" class="btn-primary" type="button">我知道了，開始</button>
+    </div>
+  </section>
+
+  <section id="guide-overlay" class="guide-overlay is-hidden" aria-label="入位引導">
+    <div class="guide-card">
+      <div id="guide-figure" class="guide-figure" aria-hidden="true"></div>
+
+      <h1 id="guide-title" class="guide-title">側面站位準備</h1>
+      <p id="guide-hint" class="guide-hint">請側面對鏡頭，讓頭頂到雙腳完整入鏡</p>
+
+      <ul class="guide-checklist">
+        <li id="chk-in-frame" class="guide-check-item">
+          <span class="chk-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8.5 L6.5 12 L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          <span id="chk-frame-label" class="chk-label">全身入鏡</span>
+        </li>
+        <li id="chk-facing-side" class="guide-check-item">
+          <span class="chk-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8.5 L6.5 12 L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          <span id="chk-facing-label" class="chk-label">側面站位</span>
+        </li>
+        <li id="chk-hold-stable" class="guide-check-item">
+          <span class="chk-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8.5 L6.5 12 L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          <span id="chk-hold-label" class="chk-label">保持穩定</span>
+        </li>
+      </ul>
+
+      <button id="btn-init-cam" class="btn-primary hidden" type="button">開啟相機與模型</button>
+      <button id="btn-skip-guide" class="guide-skip-link" type="button" disabled>跳過引導直接開始</button>
+    </div>
+  </section>
+
+  <div id="tv-rotate-hint" class="tv-rotate-hint">電視模式請把手機橫放</div>
+
+  <footer class="bottom-bar" aria-label="訓練控制列">
+    <button id="btn-end-set" class="bar-btn" type="button" disabled>結束一組</button>
+    <button id="btn-end-session" class="bar-btn bar-btn-danger" type="button" disabled>結束訓練並儲存</button>
+    <button id="btn-switch-cam" class="bar-btn" type="button" disabled>切換鏡頭</button>
+    <label class="bar-toggle">
+      <input type="checkbox" id="tts-toggle" checked>
+      <span>語音</span>
+    </label>
+    <label class="bar-toggle">
+      <input type="checkbox" id="tv-toggle">
+      <span>電視</span>
+    </label>
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>更多 - AI 健身教練</title>
+<meta name="theme-color" content="#0ea5e9">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <script type="module" crossorigin src="./assets/more-BeHGZTXq.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/sw-register-DEgpXgCw.js">
+  <link rel="modulepreload" crossorigin href="./assets/db-wefy5cVT.js">
+  <link rel="stylesheet" crossorigin href="./assets/sw-register-Bt4cX4zb.css">
+</head>
+<body>
+<main class="shell">
+  <h1>更多</h1>
+  <p class="sub"><a href="./index.html">回首頁</a> · <a href="./review.html">訓練紀錄</a></p>
+
+  <section class="card">
+    <h2>安裝到手機桌面</h2>
+    <p>安裝後從桌面圖示開啟，全螢幕無網址列，離線也能用。</p>
+    <ul class="status-list">
+      <li><strong>Android（Chrome）</strong>：右上角選單（三個點）→「加入主畫面」或「安裝應用程式」</li>
+      <li><strong>iPhone（Safari）</strong>：下方「分享」按鈕 → 往下找「加入主畫面」</li>
+    </ul>
+    <button id="btn-install" class="btn-primary hidden" type="button">直接安裝到桌面</button>
+  </section>
+
+  <section class="card">
+    <h2>分享給朋友</h2>
+    <p>把這個 AI 健身教練傳給朋友，打開連結就能用，不用註冊下載。</p>
+    <button id="btn-share" class="btn-primary" type="button">分享連結</button>
+    <p id="share-status" class="sub hidden"></p>
+  </section>
+
+  <section class="card">
+    <h2>裝置與效能檢測</h2>
+    <p>確認這支手機的相機、姿態推論效能（Pose Benchmark）、本地儲存與語音播報都可用。所有結果只存在本機。</p>
+    <a class="btn-primary" href="./device-check.html">裝置能力檢測</a>
+  </section>
+
+  <section class="card">
+    <h2>系統狀態</h2>
+    <ul class="status-list">
+      <li>安全來源：<span id="sec-ctx">檢查中</span></li>
+      <li>離線快取：<span id="sw-state">檢查中</span></li>
+      <li>Service Worker 版本：<span id="sw-version">讀取中</span></li>
+      <li>已存能力檢測結果：<span id="profile-state">檢查中</span></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

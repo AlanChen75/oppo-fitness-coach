@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>裝置能力檢測</title>
+<meta name="theme-color" content="#0ea5e9">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <script type="module" crossorigin src="./assets/deviceCheck-Bet9Yq2C.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/sw-register-DEgpXgCw.js">
+  <link rel="modulepreload" crossorigin href="./assets/db-wefy5cVT.js">
+  <link rel="modulepreload" crossorigin href="./assets/pose-benchmark-CTFJzNfz.js">
+  <link rel="stylesheet" crossorigin href="./assets/sw-register-Bt4cX4zb.css">
+</head>
+<body>
+<main class="shell">
+  <h1>裝置能力檢測</h1>
+  <p class="sub"><a href="./index.html">回首頁</a></p>
+
+  <section class="card">
+    <h2>一鍵靜態檢測</h2>
+    <p>檢查安全來源、瀏覽器、儲存、TTS、錄影格式支援等不需相機的項目。</p>
+    <button id="btn-static" class="btn-primary">執行靜態檢測</button>
+    <div id="static-results" class="result-table"></div>
+  </section>
+
+  <section class="card">
+    <h2>本地儲存實測（IndexedDB / OPFS）</h2>
+    <p>實際寫入、讀回、刪除測試資料，不只看 API 是否存在。</p>
+    <button id="btn-storage" class="btn-primary">執行儲存實測</button>
+    <div id="storage-results" class="result-table"></div>
+  </section>
+
+  <section class="card">
+    <h2>語音播報實測</h2>
+    <p>播一句繁中測試語音，請確認喇叭或耳機聽得到。</p>
+    <button id="btn-tts" class="btn-primary">播放測試語音</button>
+    <div id="tts-results" class="result-table"></div>
+  </section>
+
+  <section class="card">
+    <h2>相機與姿態推論 Benchmark</h2>
+    <p>開啟後置鏡頭，載入 Pose Landmarker Lite 模型，連續推論並統計 p50 / p95 延遲、有效 Pose Hz、掉幀。請固定手機、全身入鏡。</p>
+    <div class="row2">
+      <button id="btn-cam" class="btn-primary">開啟相機 + 載入模型</button>
+      <button id="btn-bench" class="btn-primary" disabled>開始 60 秒 Benchmark</button>
+    </div>
+    <label class="opt"><input type="checkbox" id="quick-mode"> 快速模式（15 秒，僅除錯用）</label>
+    <label class="opt"><input type="checkbox" id="front-cam"> 用前鏡頭（自己要看畫面時；預覽鏡像）</label>
+    <div class="video-wrap">
+      <video id="cam" playsinline muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+    <div id="bench-live" class="bench-live"></div>
+    <div id="cam-results" class="result-table"></div>
+  </section>
+
+  <section class="card">
+    <h2>能力 Profile</h2>
+    <p>所有測試結果合併為 device_capability_profile，存在本機並可匯出。</p>
+    <div class="row2">
+      <button id="btn-save" class="btn-secondary">保存 Profile</button>
+      <button id="btn-export" class="btn-secondary">匯出 JSON</button>
+    </div>
+    <div id="profile-results" class="result-table"></div>
+  </section>
+</main>
+</body>
+</html>
